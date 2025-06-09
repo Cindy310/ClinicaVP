@@ -5,7 +5,13 @@ GO
 -- Usar la base de datos
 USE ClinicaVeterinariaDB;
 GO
-
+CREATE TABLE Users (
+    id INT PRIMARY KEY IDENTITY(1,1),
+    name VARCHAR(100) NOT NULL,
+    passwordHash VARCHAR(64) NOT NULL,
+    email VARCHAR(200) NOT NULL UNIQUE,
+    status TINYINT NOT NULL
+);
 -- Tabla de dueños de mascotas
 CREATE TABLE Duenos (
     id_dueno INT PRIMARY KEY IDENTITY(1,1),
