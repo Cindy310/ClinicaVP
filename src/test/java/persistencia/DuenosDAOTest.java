@@ -37,7 +37,6 @@ class DuenosDAOTest {
 
         boolean actualizado = duenosDAO.update(dueno);
         assertTrue(actualizado, "El dueño debería actualizarse correctamente.");
-
         getById(dueno);
     }
 
