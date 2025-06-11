@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import esfe.dominio.Duenos;
-
 public class DuenosDAO {
     private ConnectionManager conn;
     private PreparedStatement ps;
