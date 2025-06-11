@@ -7,14 +7,15 @@ public class Duenos {
     private String correo;
 
     public Duenos() {
+        // Constructor vacío
     }
+
     public Duenos(int idDueno, String nombre, String telefono, String correo) {
         this.idDueno = idDueno;
         this.nombre = nombre;
         this.telefono = telefono;
         this.correo = correo;
     }
-
 
     public int getIdDueno() {
         return idDueno;
@@ -47,8 +48,4 @@ public class Duenos {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
-
 }
-
-
-
