@@ -29,7 +29,6 @@ class DuenosDAOTest {
 
         return res;
     }
-
     private void update(Duenos dueno) throws SQLException {
         dueno.setNombre(dueno.getNombre() + "_mod");
         dueno.setTelefono("8888-8888");
