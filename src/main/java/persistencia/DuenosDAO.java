@@ -14,6 +14,7 @@ public class DuenosDAO {
     public DuenosDAO() {
         conn = ConnectionManager.getInstance();
     }
+
     /**
      * Crea un nuevo dueño en la base de datos.
      *

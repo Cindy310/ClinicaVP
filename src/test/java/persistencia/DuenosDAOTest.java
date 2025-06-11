@@ -72,6 +72,7 @@ class DuenosDAOTest {
         assertNull(res, "El dueño eliminado ya no debe existir en la base de datos.");
     }
 
+
     @Test
     void testDuenosDAO() throws SQLException {
         Random rand = new Random();

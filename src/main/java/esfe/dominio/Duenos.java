@@ -8,6 +8,7 @@ public class Duenos {
 
     public Duenos() {
         // Constructor vacío
+
     }
     public Duenos(int idDueno, String nombre, String telefono, String correo) {
         this.idDueno = idDueno;
