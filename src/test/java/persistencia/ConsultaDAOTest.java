@@ -26,7 +26,7 @@ class ConsultaDAOTest {
 
         assertNotNull(res, "La consulta creada no debe ser nula.");
         assertTrue(res.getIdConsulta() > 0, "El ID generado debe ser mayor que 0.");
-        assertEquals(consulta.getFecha().toLocalDate(), res.getFecha().toLocalDate(), "La fecha debe coincidir.");
+        assertEquals(consulta.getFecha().toLowerCase(), res.getFecha().toLowerCase(), "La fecha debe coincidir.");
         assertEquals(consulta.getMotivo(), res.getMotivo(), "El motivo debe coincidir.");
         assertEquals(consulta.getCosto(), res.getCosto(), "El costo debe coincidir.");
         assertEquals(consulta.getIdMascota(), res.getIdMascota(), "El ID de la mascota debe coincidir.");
@@ -50,7 +50,7 @@ class ConsultaDAOTest {
 
         assertNotNull(res, "La consulta obtenida no debe ser nula.");
         assertEquals(consulta.getIdConsulta(), res.getIdConsulta(), "El ID debe coincidir.");
-        assertEquals(consulta.getFecha().toLocalDate(), res.getFecha().toLocalDate(), "La fecha debe coincidir.");
+        assertEquals(consulta.getFecha().toLowerCase(), res.getFecha().toLowerCase(), "La fecha debe coincidir.");
         assertEquals(consulta.getMotivo(), res.getMotivo(), "El motivo debe coincidir.");
         assertEquals(consulta.getCosto(), res.getCosto(), "El costo debe coincidir.");
         assertEquals(consulta.getIdMascota(), res.getIdMascota(), "El ID de la mascota debe coincidir.");

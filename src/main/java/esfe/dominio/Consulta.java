@@ -1,71 +1,73 @@
 package esfe.dominio;
 
-    public class Consulta {
-        private int idConsulta;
-        private String fecha;
-        private String motivo;
-        private double costo;
-        private int idMascota;
-        private int idVeterinario;
+import java.sql.Date;
 
-        public Consulta() {
+public class Consulta {
+    private int idConsulta;
+    private String fecha;
+    private String motivo;
+    private double costo;
+    private int idMascota;
+    private int idVeterinario;
 
-        }
+    public Consulta() {
 
-        public Consulta(int idConsulta, String fecha, String motivo, double costo, int idMascota, int idVeterinario) {
-            this.idConsulta = idConsulta;
-            this.fecha = fecha;
-            this.motivo = motivo;
-            this.costo = costo;
-            this.idMascota = idMascota;
-            this.idVeterinario = idVeterinario;
-        }
+    }
 
-        public int getIdConsulta() {
-            return idConsulta;
-        }
+    public Consulta(int idConsulta, Date fecha, String motivo, double costo, int idMascota, int idVeterinario) {
+        this.idConsulta = idConsulta;
+        this.fecha = fecha;
+        this.motivo = motivo;
+        this.costo = costo;
+        this.idMascota = idMascota;
+        this.idVeterinario = idVeterinario;
+    }
 
-        public void setIdConsulta(int idConsulta) {
-            this.idConsulta = idConsulta;
-        }
+    public int getIdConsulta() {
+        return idConsulta;
+    }
 
-        public String getFecha() {
-            return fecha;
-        }
+    public void setIdConsulta(int idConsulta) {
+        this.idConsulta = idConsulta;
+    }
 
-        public void setFecha(String fecha) {
-            this.fecha = fecha;
-        }
+    public String getFecha() {
+        return fecha;
+    }
 
-        public String getMotivo() {
-            return motivo;
-        }
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
 
-        public void setMotivo(String motivo) {
-            this.motivo = motivo;
-        }
+    public String getMotivo() {
+        return motivo;
+    }
 
-        public double getCosto() {
-            return costo;
-        }
+    public void setMotivo(String motivo) {
+        this.motivo = motivo;
+    }
 
-        public void setCosto(double costo) {
-            this.costo = costo;
-        }
+    public double getCosto() {
+        return costo;
+    }
 
-        public int getIdMascota() {
-            return idMascota;
-        }
+    public void setCosto(double costo) {
+        this.costo = costo;
+    }
 
-        public void setIdMascota(int idMascota) {
-            this.idMascota = idMascota;
-        }
+    public int getIdMascota() {
+        return idMascota;
+    }
 
-        public int getIdVeterinario() {
-            return idVeterinario;
-        }
+    public void setIdMascota(int idMascota) {
+        this.idMascota = idMascota;
+    }
 
-        public void setIdVeterinario(int idVeterinario) {
-            this.idVeterinario = idVeterinario;
-        }
+    public int getIdVeterinario() {
+        return idVeterinario;
+    }
+
+    public void setIdVeterinario(int idVeterinario) {
+        this.idVeterinario = idVeterinario;
+    }
 }
