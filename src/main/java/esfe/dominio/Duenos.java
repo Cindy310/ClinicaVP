@@ -5,6 +5,11 @@ public class Duenos {
     private String nombre;
     private String telefono;
     private String correo;
+    @Override
+    public String toString() {
+        return this.nombre + " (ID: " + this.idDueno + ")";
+    }
+
 
     public Duenos() {
         // Constructor vacío

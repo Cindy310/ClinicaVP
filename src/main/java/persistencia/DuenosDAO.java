@@ -56,6 +56,7 @@ public class DuenosDAO {
                 } catch (SQLException e) {
                     System.err.println("Error al cerrar PreparedStatement en create (DuenoDAO): " + e.getMessage());
                 }
+
             }
             conn.disconnect();
         }
@@ -222,5 +223,44 @@ public class DuenosDAO {
             conn.disconnect();
         }
         return dueno;
+    }
+    public ArrayList<Duenos> getAll() throws SQLException {
+        ArrayList<Duenos> lista = new ArrayList<>();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            stmt = conn.connect().prepareStatement("SELECT * FROM Duenos");
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Duenos d = new Duenos();
+                d.setIdDueno(rs.getInt("id_dueno"));
+                d.setNombre(rs.getString("nombre"));
+                d.setTelefono(rs.getString("telefono"));
+                d.setCorreo(rs.getString("correo"));
+                lista.add(d);
+            }
+        } catch (SQLException ex) {
+            throw new SQLException("Error al obtener todos los dueños: " + ex.getMessage(), ex);
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    System.err.println("Error al cerrar PreparedStatement en getAll (DuenosDAO): " + e.getMessage());
+                }
+            }
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    System.err.println("Error al cerrar ResultSet en getAll (DuenosDAO): " + e.getMessage());
+                }
+            }
+            conn.disconnect();
+        }
+
+        return lista;
     }
 }
