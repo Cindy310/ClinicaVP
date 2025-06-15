@@ -38,6 +38,11 @@ public class MainForm extends JFrame {
             mascotaForm.setVisible(true);
         });
 
+        btnVeterinarios.addActionListener(e -> {
+            VeterinarioReadingForm form = new VeterinarioReadingForm(this);
+            form.setVisible(true);
+        });
+
     }
 
     private void createMenu() {
