@@ -48,4 +48,8 @@ public class Veterinario {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
+    public int getId() {
+        return idVeterinario; // asegúrate de que este sea el nombre del campo correcto
+    }
+
 }

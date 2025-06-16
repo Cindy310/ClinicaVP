@@ -4,7 +4,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import esfe.dominio.Veterinario;
 
 public class VeterinarioDAO {
@@ -16,15 +15,6 @@ public class VeterinarioDAO {
         conn = ConnectionManager.getInstance();
     }
 
-    /**
-     * Crea un nuevo veterinario en la base de datos.
-     *
-     * @param vet El objeto Veterinario que contiene la información del nuevo veterinario.
-     *            Se espera que los campos nombre, especialidad y correo estén establecidos.
-     *            El campo id_veterinario será generado automáticamente por la base de datos.
-     * @return El objeto Veterinario recién creado, incluyendo el id_veterinario generado, o null si ocurre un error.
-     * @throws SQLException Si ocurre un error al interactuar con la base de datos durante la creación.
-     */
     public Veterinario create(Veterinario vet) throws SQLException {
         Veterinario res = null;
         PreparedStatement localPs = null;
@@ -63,14 +53,6 @@ public class VeterinarioDAO {
         return res;
     }
 
-    /**
-     * Actualiza la información de un veterinario existente.
-     *
-     * @param vet El objeto Veterinario con la información actualizada.
-     *           Se requiere que el campo id_veterinario esté correctamente establecido.
-     * @return true si la actualización fue exitosa, false en caso contrario.
-     * @throws SQLException Si ocurre un error al interactuar con la base de datos.
-     */
     public boolean update(Veterinario vet) throws SQLException {
         boolean res = false;
         try {
@@ -99,13 +81,6 @@ public class VeterinarioDAO {
         return res;
     }
 
-    /**
-     * Elimina un veterinario de la base de datos basado en su id_veterinario.
-     *
-     * @param vet El objeto Veterinario que contiene el id_veterinario del veterinario a eliminar.
-     * @return true si la eliminación fue exitosa, false en caso contrario.
-     * @throws SQLException Si ocurre un error al interactuar con la base de datos.
-     */
     public boolean delete(Veterinario vet) throws SQLException {
         boolean res = false;
         try {
@@ -132,13 +107,6 @@ public class VeterinarioDAO {
         return res;
     }
 
-    /**
-     * Busca veterinarios por nombre (búsqueda parcial usando LIKE).
-     *
-     * @param nombre El nombre o parte del nombre a buscar.
-     * @return Una lista de veterinarios que coinciden con el nombre proporcionado.
-     * @throws SQLException Si ocurre un error al interactuar con la base de datos.
-     */
     public ArrayList<Veterinario> search(String nombre) throws SQLException {
         ArrayList<Veterinario> records = new ArrayList<>();
         try {
@@ -159,32 +127,17 @@ public class VeterinarioDAO {
         } catch (SQLException ex) {
             throw new SQLException("Error al buscar veterinarios: " + ex.getMessage(), ex);
         } finally {
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) {
-                    System.err.println("Error al cerrar PreparedStatement en search (VeterinarioDAO): " + e.getMessage());
-                }
+            if (ps != null) try { ps.close(); } catch (SQLException e) {
+                System.err.println("Error al cerrar PreparedStatement en search: " + e.getMessage());
             }
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch (SQLException e) {
-                    System.err.println("Error al cerrar ResultSet en search (VeterinarioDAO): " + e.getMessage());
-                }
+            if (rs != null) try { rs.close(); } catch (SQLException e) {
+                System.err.println("Error al cerrar ResultSet en search: " + e.getMessage());
             }
             conn.disconnect();
         }
         return records;
     }
 
-    /**
-     * Obtiene un veterinario por su id_veterinario.
-     *
-     * @param id El id_veterinario del veterinario a buscar.
-     * @return Un objeto Veterinario si se encuentra, null si no existe.
-     * @throws SQLException Si ocurre un error al interactuar con la base de datos.
-     */
     public Veterinario getById(int id) throws SQLException {
         Veterinario vet = null;
         try {
@@ -204,22 +157,53 @@ public class VeterinarioDAO {
         } catch (SQLException ex) {
             throw new SQLException("Error al obtener un veterinario por id: " + ex.getMessage(), ex);
         } finally {
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) {
-                    System.err.println("Error al cerrar PreparedStatement en getById (VeterinarioDAO): " + e.getMessage());
-                }
+            if (ps != null) try { ps.close(); } catch (SQLException e) {
+                System.err.println("Error al cerrar PreparedStatement en getById: " + e.getMessage());
             }
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch (SQLException e) {
-                    System.err.println("Error al cerrar ResultSet en getById (VeterinarioDAO): " + e.getMessage());
-                }
+            if (rs != null) try { rs.close(); } catch (SQLException e) {
+                System.err.println("Error al cerrar ResultSet en getById: " + e.getMessage());
             }
             conn.disconnect();
         }
         return vet;
+    }
+
+    /**
+     * Retorna todos los veterinarios en la base de datos.
+     *
+     * @return Lista de objetos Veterinario.
+     */
+    public ArrayList<Veterinario> getAll() {
+        ArrayList<Veterinario> lista = new ArrayList<>();
+        try {
+            ps = conn.connect().prepareStatement(
+                    "SELECT id_veterinario, nombre, especialidad, correo FROM Veterinarios"
+            );
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Veterinario vet = new Veterinario();
+                vet.setIdVeterinario(rs.getInt("id_veterinario"));
+                vet.setNombre(rs.getString("nombre"));
+                vet.setEspecialidad(rs.getString("especialidad"));
+                vet.setCorreo(rs.getString("correo"));
+                lista.add(vet);
+            }
+        } catch (SQLException ex) {
+            System.err.println("Error al obtener todos los veterinarios: " + ex.getMessage());
+        } finally {
+            if (ps != null) try { ps.close(); } catch (SQLException e) {
+                System.err.println("Error al cerrar PreparedStatement en getAll: " + e.getMessage());
+            }
+            if (rs != null) try { rs.close(); } catch (SQLException e) {
+                System.err.println("Error al cerrar ResultSet en getAll: " + e.getMessage());
+            }
+            try {
+                conn.disconnect();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return lista;
     }
 }
