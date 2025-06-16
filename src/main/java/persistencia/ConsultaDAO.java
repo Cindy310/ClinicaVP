@@ -20,39 +20,27 @@ public class ConsultaDAO {
     /**
      * Crea una nueva consulta veterinaria en la base de datos.
      */
-    public Consulta create(Consulta consulta) throws SQLException {
-        Consulta res = null;
-        PreparedStatement localPs = null;
+    public void create(Consulta consulta) throws SQLException {
+        PreparedStatement ps = null;
         try {
-            localPs = conn.connect().prepareStatement(
-                    "INSERT INTO Consultas (fecha, motivo, costo, id_mascota, id_veterinario) VALUES (?, ?, ?, ?, ?)",
-                    java.sql.Statement.RETURN_GENERATED_KEYS
+            ps = conn.connect().prepareStatement(
+                    "INSERT INTO Consultas (fecha, motivo, costo, id_mascota, id_veterinario) VALUES (?, ?, ?, ?, ?)"
             );
-            localPs.setDate(1, consulta.getFecha());
-            localPs.setString(2, consulta.getMotivo());
-            localPs.setFloat(3, consulta.getCosto());
-            localPs.setInt(4, consulta.getIdMascota());
-            localPs.setInt(5, consulta.getIdVeterinario());
+            ps.setDate(1, consulta.getFecha());
+            ps.setString(2, consulta.getMotivo());
+            ps.setFloat(3, consulta.getCosto());
+            ps.setInt(4, consulta.getIdMascota());
+            ps.setInt(5, consulta.getIdVeterinario());
 
-            int filas = localPs.executeUpdate();
-
-            if (filas != 0) {
-                ResultSet generatedKeys = localPs.getGeneratedKeys();
-                if (generatedKeys.next()) {
-                    int idGenerado = generatedKeys.getInt(1);
-                    res = getById(idGenerado);
-                } else {
-                    throw new SQLException("Creating consulta failed, no ID obtained.");
-                }
-            }
+            ps.executeUpdate();
         } catch (SQLException ex) {
-            throw new SQLException("Error al crear la consulta: " + ex.getMessage(), ex);
+            throw new SQLException("Error al crear consulta: " + ex.getMessage(), ex);
         } finally {
-            if (localPs != null) localPs.close();
+            if (ps != null) ps.close();
             conn.disconnect();
         }
-        return res;
     }
+
 
     /**
      * Actualiza la información de una consulta existente.
