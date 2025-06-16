@@ -58,4 +58,10 @@ public class Mascota {
     public void setIdDueno(int idDueno) {
         this.idDueno = idDueno;
     }
+    public int getId() {
+        return idMascota; // asegúrate de que este sea el nombre del campo correcto
+    }
+
+
+
 }
