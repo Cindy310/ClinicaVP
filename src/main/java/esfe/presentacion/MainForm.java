@@ -42,6 +42,10 @@ public class MainForm extends JFrame {
             VeterinarioReadingForm form = new VeterinarioReadingForm(this);
             form.setVisible(true);
         });
+        btnConsultas.addActionListener(e -> {
+            ConsultaReadingForm form = new ConsultaReadingForm(this);
+            form.setVisible(true);
+        });
 
     }
 

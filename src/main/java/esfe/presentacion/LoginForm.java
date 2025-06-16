@@ -74,4 +74,8 @@ public class LoginForm extends JDialog {
                     JOptionPane.ERROR_MESSAGE); // El tipo de icono que se muestra (error).
         }
     }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
+    }
 }
